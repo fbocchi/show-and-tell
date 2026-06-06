@@ -1,0 +1,37 @@
+# Bytecode Python
+__pycache__/
+*.py[cod]
+
+# Ambienti virtuali
+venv/
+.venv/
+env/
+
+# PyCharm
+.idea/
+
+# File di log
+*.log
+
+# Cache di test
+.pytest_cache/
+
+# Cache di type checker
+.mypy_cache/
+
+# Cache di linting
+.ruff_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# File di sistema Windows
+Thumbs.db
+Desktop.ini
+
+# File di sistema macOS
+.DS_Store
