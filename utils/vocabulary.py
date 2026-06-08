@@ -1,11 +1,15 @@
 from collections import Counter
 
+from utils.tokenizer import Tokenizer
+
+
 class Vocabulary:
-    def __init__(self, min_freq=5):
+    def __init__(self, tokenizer: Tokenizer, min_freq=5):
+        self.tokenizer = tokenizer
         self.min_freq = min_freq
 
-        self.word_to_idx = {}
-        self.idx_to_word = {}
+        self.token_to_idx = {}
+        self.idx_to_token = {}
         self.vocab = []
 
         self.PAD = "<pad>"
@@ -31,34 +35,36 @@ class Vocabulary:
 
     @property
     def end_id(self):
-        return self.word_to_idx[self.END]
+        return self.token_to_idx[self.END]
 
     @property
     def size(self):
         return len(self.vocab)
 
-    def build(self, captions):
-        counter = Counter()
+    def build(self, captions: list[str]):
+        frequency_counter = Counter()
 
-        for cap in captions:
-            counter.update(cap.split())
+        captions = self.tokenizer.tokenize_all(captions)
 
-        words = [
-            (w, f) for w, f in counter.items()
-            if f >= self.min_freq
+        for tokens in captions:
+            frequency_counter.update(tokens)
+
+        tokens = [
+            (token, freq) for token, freq in frequency_counter.items()
+            if freq >= self.min_freq
         ]
 
         # sort by frequency (desc)
-        words = sorted(words, key=lambda x: x[1], reverse=True)
-        words = [w for w, _ in words]
+        tokens = sorted(tokens, key=lambda x: x[1], reverse=True)
+        tokens = [w for w, _ in tokens]
 
-        self.vocab = [self.PAD, self.UNK, self.START, self.END] + words
+        self.vocab = [self.PAD, self.UNK, self.START, self.END] + tokens
 
-        self.word_to_idx = {w: i for i, w in enumerate(self.vocab)}
-        self.idx_to_word = {i: w for w, i in self.word_to_idx.items()}
+        self.token_to_idx = {w: i for i, w in enumerate(self.vocab)}
+        self.idx_to_token = {i: w for w, i in self.token_to_idx.items()}
 
-    def encode(self, tokens):
+    def vectorize(self, tokens: list[str]):
         return [
-            self.word_to_idx.get(tok, self.word_to_idx[self.UNK])
-            for tok in tokens
+            self.token_to_idx.get(token, self.token_to_idx[self.UNK])
+            for token in tokens
         ]

@@ -1,11 +1,10 @@
 import re
 
 
-def clean(text):
-    text = text.lower()
-    text = re.sub(r"[^\w\s]", "", text)
-    return text.strip()
+def clean(caption: str) -> str:
+    caption = caption.lower()
+    caption = re.sub(r"[^\w\s]", "", caption)
+    return caption.strip()
 
-def clean_all(captions):
-    return [clean(c) for c in captions]
-
+def clean_all(captions: list[str]) -> list[str]:
+    return [clean(caption) for caption in captions]
