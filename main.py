@@ -1,6 +1,6 @@
 from utils.add_start_and_end_tokens import add_start_and_end_tokens
 from utils.text_cleaner import clean_all
-from utils.tokenizer import Tokenizer
+from utils.caption_tokenizer import CaptionTokenizer
 from utils.vocabulary import Vocabulary
 from utils.max_len import compute_max_len
 from utils.text_vectorizer import TextVectorizer
@@ -23,7 +23,7 @@ def main():
         "A child playing with a ball."
     ]
 
-    tokenizer = Tokenizer()
+    tokenizer = CaptionTokenizer()
 
     vocab = Vocabulary(tokenizer, min_freq=1)
 
