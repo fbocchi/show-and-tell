@@ -7,6 +7,10 @@ venv/
 .venv/
 env/
 
+models/
+*.keras
+*.h5
+
 # PyCharm
 .idea/
 
