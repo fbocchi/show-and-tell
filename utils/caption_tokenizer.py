@@ -1,4 +1,3 @@
-
 class CaptionTokenizer:
     def __init__(self):
         pass

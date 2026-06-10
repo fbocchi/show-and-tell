@@ -1,5 +1,6 @@
 from collections import Counter
 
+
 class Vocabulary():
     def __init__(self, min_freq: int = 5):
         self.min_freq = min_freq
