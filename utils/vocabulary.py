@@ -1,7 +1,7 @@
 from collections import Counter
 
 
-class Vocabulary():
+class Vocabulary:
     def __init__(self, min_freq: int = 5):
         self.min_freq = min_freq
         self.vocab = ["[START]", "[END]"]
@@ -13,8 +13,7 @@ class Vocabulary():
             freqs.update(caption)
 
         tokens_and_freqs = [
-            (token, freq) for token, freq in freqs.items()
-            if freq >= self.min_freq
+            (token, freq) for token, freq in freqs.items() if freq >= self.min_freq
         ]
 
         tokens_and_freqs = sorted(tokens_and_freqs, key=lambda x: x[1], reverse=True)
