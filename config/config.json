@@ -1,6 +1,6 @@
 {
     "vec_config": {
-        "name": "text_vectorization_1",
+        "name": "text_vectorization",
         "trainable": true,
         "dtype": {
             "module": "keras",
